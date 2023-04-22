@@ -1,6 +1,6 @@
 # reeq
 
-aka. **Re**dis **E**vent **Queue**
+aka. **Re**dis **E**vent **Q**ueue
 
 An extremely simple, minimalistic library for handling events published to Redis.
 
@@ -24,8 +24,8 @@ def handle1(event: str, payload: Dict[str, Any]):
 
 # listen for specific event
 @reeq.listener('foo.bar.baz')
-def handle1(event: str, payload: Dict[str, Any]):
-    logging.info(f'[1] Got event "{event}" with payload: {payload}')
+def handle2(event: str, payload: Dict[str, Any]):
+    logging.info(f'[2] Got event "{event}" with payload: {payload}')
 
 
 if __name__ == '__main__':
