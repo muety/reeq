@@ -14,7 +14,6 @@ from redis.exceptions import ConnectionError as RedisConnectionError
 ListenCallback = Callable[[str, Any], None]
 
 logger = logging.getLogger('reeq')
-logger.setLevel(logging.INFO)
 
 valid_pattern = re.compile('^[\w\d]+(?:\\.[\w\d]+)*(?:\\.\\*)?$')
 
@@ -31,10 +30,11 @@ class Reeq:
 
     def init(self, redis_url: str, workers: int = os.cpu_count()):
         if self._pubsub is not None:
-            return  # already initalized
+            return  # already initialized
 
         self._redis: redis.Redis = redis.from_url(redis_url, decode_responses=True)
         self._redis.ping()
+        logger.info('connected to redis instance')
 
         self._pubsub: PubSub = self._redis.pubsub()
         self._executor: ThreadPoolExecutor = ThreadPoolExecutor(max_workers=workers)
@@ -51,6 +51,8 @@ class Reeq:
     def listen(self, pattern: str, callback: ListenCallback):
         if not valid_pattern.match(pattern):
             raise Exception('invalid pattern')
+
+        logger.debug(f'registering listener for pattern "{pattern}"')
 
         self._listeners.append((pattern, callback))
 
@@ -74,6 +76,7 @@ class Reeq:
             subpattern: str = prefix if len(parts) == 1 else f'{prefix}.*'
             self._pubsub.psubscribe(subpattern)
             self._active_subscriptions.add(prefix)
+            logger.debug(f'subscribed to channel "{subpattern}"')
 
     def _start_receive(self):
         def receiver():
