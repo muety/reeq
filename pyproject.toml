@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reeq"
+version = "0.2.0"
+authors = [
+    { name = "Ferdinand Mütsch", email = "ferdinand@muetsch.io" }
+]
+description = "An extremely simple, minimalistic library for handling events published to Redis"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Cython',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: MacOS',
+    'Operating System :: Unix',
+    'Operating System :: POSIX :: Linux',
+    'Natural Language :: English',
+    'System :: Distributed Computing',
+    'Typing :: Typed'
+]
+dependencies = [
+    "redis"
+]
+
+[project.urls]
+"Bug Tracker" = "https://github.com/muety/reeq/issues"
+"Source Code" = "https://github.com/muety/reeq"

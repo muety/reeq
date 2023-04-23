@@ -35,10 +35,6 @@ if __name__ == '__main__':
     reeq.publish('foo.bar.baz', '{"value": 1}')
 ```
 
-## To Do
-
-* [ ] Add `pyproject.toml`
-
 ## License
 
 MIT
