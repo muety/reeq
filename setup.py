@@ -12,7 +12,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
     name='reeq',
-    version='0.1.1',
+    version='0.2.0',
     description='An extremely simple, minimalistic library for handling events published to Redis.',
     long_description=long_description,
     long_description_content_type='text/markdown',

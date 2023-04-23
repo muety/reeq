@@ -45,7 +45,10 @@ class Reeq:
 
         self._start_receive()
 
-    def publish(self, event: str, payload: Any) -> int:
+    def publish(self, event: str, payload: Dict[str, Any]) -> int:
+        return self.publish_raw(event, json.dumps(payload))
+
+    def publish_raw(self, event: str, payload: Any) -> int:
         return self._redis.publish(event, payload)
 
     def listen(self, pattern: str, callback: ListenCallback):
